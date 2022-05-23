@@ -31,6 +31,10 @@ jobs:
 
           export SIREUM_HOME=${PWD}/kekinian
 
+          cd $SIREUM_HOME/hamr/codegen/arsit
+          git checkout module
+          git pull --recurse
+          
           $SIREUM_HOME/bin/build.cmd setup
           
           export PATH=$SIREUM_HOME/bin:$PATH

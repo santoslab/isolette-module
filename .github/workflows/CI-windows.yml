@@ -33,21 +33,35 @@ jobs:
 
           set SIREUM_HOME=%GITHUB_WORKSPACE%\kekinian
 
-          REM build.cmd sometimes fails on windows when it tries to
-          REM replace the in-use bin\sireum.jar with the freshly built one.
-          REM Workaround is to run command in a different cmd and then 
-          REM manually copy the jar over over afterwards
+          cd %SIREUM_HOME%\hamr\codegen\arsit
+          git checkout module
+          git pull --recurse
 
-          cmd.exe /c %SIREUM_HOME%\bin\build.cmd setup
-          copy %SIREUM_HOME%\out\sireum-proyek\assemble\sireum.jar %SIREUM_HOME%\bin
+          call %SIREUM_HOME%\bin\build.cmd setup
+
+          if %errorlevel% neq 0 (
+            if exist %SIREUM_HOME%\out\sireum-proyek\assemble\sireum.jar (
+
+              REM build.cmd sometimes fails on windows when it tries to
+              REM replace the in-use bin\sireum.jar with the freshly built one.
+              REM Workaround is to manually copy the jar over
+
+              copy %SIREUM_HOME%\out\sireum-proyek\assemble\sireum.jar %SIREUM_HOME%\bin
+            ) else (
+              echo "Error occurred while building sireum.jar"
+              exit %errorlevel%
+            )
+          )
           
           set PATH=%SIREUM_HOME%\bin;%PATH%
 
-          cmd.exe /c %SIREUM_HOME%\bin\install\fmide.cmd
+          call %SIREUM_HOME%\bin\install\fmide.cmd
           
-          cmd.exe /c %GITHUB_WORKSPACE%\isolette-module\aadl\bin\run-hamr-jvm.cmd
+          call %GITHUB_WORKSPACE%\isolette-module\aadl\bin\clean.cmd
           
-          cmd.exe /c %GITHUB_WORKSPACE%\isolette-module\hamr\slang\bin\scalajs.cmd
+          call %GITHUB_WORKSPACE%\isolette-module\aadl\bin\run-hamr-jvm.cmd
+          
+          call %GITHUB_WORKSPACE%\isolette-module\hamr\slang\bin\scalajs.cmd
           
       - name: 'Upload JS'
         uses: actions/upload-artifact@v3
