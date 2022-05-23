@@ -20,10 +20,18 @@ import org.sireum._
 
 val hamrDir = Os.slashDir.up.up / "hamr" / "slang"
 
-println("Only keep the behavior code in src/components")
+println("Only keep the user code in src/components and src/common/library")
 
-ISZ("bin", "src/app", "src/common", "src/infrastructure", "src/inspector", "src/test", "versions.properties").foreach(p => {
-  val _p = (hamrDir / p)
-  println(s"Removing: ${_p}" )
-  _p.removeAll()
-})
+def del(p: Os.Path): Unit = {
+  assert (p.exists, s"${p} does not exist")
+  p.removeAll()
+  println(s"Removed ${p}")
+}
+
+del(hamrDir / "bin")
+del(hamrDir / "src" / "app")
+del(hamrDir / "src" / "common" / "data")
+del(hamrDir / "src" / "infrastructure")
+del(hamrDir / "src" / "inspector")
+del(hamrDir / "src" / "test")
+del(hamrDir / "versions.properties")
