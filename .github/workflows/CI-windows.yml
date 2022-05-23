@@ -1,0 +1,68 @@
+name: Windows
+
+on:
+  push:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 17 * * *"  
+jobs:
+
+  ci:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
+          path: isolette-module
+      - name: Cache ScalaJS Standalone
+        id: cache-scalajs
+        uses: actions/cache@v2
+        with:
+          path: isolette-module\hamr\slang\lib
+          key: ${{ runner.os }}-1.7.1-scalajs
+      - name: Test
+        shell: cmd
+        run: |
+          xcopy %GITHUB_WORKSPACE%\cache\coursier %HOMEDRIVE%%HOMEPATH%\cache\coursier\ /E/H
+          set COURSIER_CACHE=%HOMEDRIVE%%HOMEPATH%\cache\coursier
+
+          cd /d %GITHUB_WORKSPACE%
+
+          git clone --rec https://github.com/sireum/kekinian.git
+
+          set SIREUM_HOME=%GITHUB_WORKSPACE%\kekinian
+
+          REM build.cmd sometimes fails on windows when it tries to
+          REM replace the in-use bin\sireum.jar with the freshly built one.
+
+          cmd.exe /c %SIREUM_HOME%\bin\build.cmd setup
+
+          echo %ERRORLEVEL% after build.cmd
+          
+          dir %SIREUM_HOME%\out\sireum-proyek\assemble\
+          copy %SIREUM_HOME%\out\sireum-proyek\assemble\sireum.jar %SIREUM_HOME%\bin
+         
+          echo %ERRORLEVEL% after copy jar
+          
+          set PATH=%SIREUM_HOME%\bin;%PATH%
+
+          cmd.exe /c %SIREUM_HOME%\bin\install\fmide.cmd
+
+          echo %ERRORLEVEL% after fmide install
+          
+          cmd.exe /c %GITHUB_WORKSPACE%\isolette-module\aadl\bin\run-hamr-jvm.cmd
+
+          echo %ERRORLEVEL% after run-hamr-jvm
+          
+          cmd.exe /c %GITHUB_WORKSPACE%\isolette-module\hamr\slang\bin\scalajs.cmd
+          
+      - name: 'Upload JS'
+        uses: actions/upload-artifact@v3
+        with:
+          name: generated-win-site
+          path: |
+            isolette-module\hamr\slang\index.html
+            isolette-module\hamr\slang\js\main.js
+          retention-days: 5
+

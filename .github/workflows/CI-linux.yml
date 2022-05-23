@@ -1,0 +1,57 @@
+name: Linux
+
+on:
+  push:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 17 * * *"  
+jobs:
+
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout isolette-module
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+          path: isolette-module
+      - name: Cache ScalaJS Standalone
+        id: cache-scalajs
+        uses: actions/cache@v2
+        with:
+          path: isolette-module/hamr/slang/lib
+          key: ${{ runner.os }}-1.7.1-scalajs
+      - name: Test
+        run: |
+          export COURSIER_CACHE=$GITHUB_WORKSPACE/cache/coursier
+
+          cd $GITHUB_WORKSPACE
+
+          git clone --rec https://github.com/sireum/kekinian.git
+          
+          export SIREUM_HOME=${PWD}/kekinian
+
+          cd $SIREUM_HOME/hamr/codegen/arsit
+          git checkout module
+          git pull --recurse
+
+          $SIREUM_HOME/bin/build.cmd setup
+          
+          export PATH=$SIREUM_HOME/bin:$PATH
+
+          $SIREUM_HOME/bin/install/fmide.cmd
+
+          $GITHUB_WORKSPACE/isolette-module/aadl/bin/run-hamr-jvm.cmd
+
+          $GITHUB_WORKSPACE/isolette-module/hamr/slang/bin/scalajs.cmd
+
+          cat $GITHUB_WORKSPACE/isolette-module/hamr/slang/js/main.js
+          
+      - name: 'Upload JS'
+        uses: actions/upload-artifact@v3
+        with:
+          name: generated-linux-site
+          path: |
+            isolette-module/hamr/slang/index.html
+            isolette-module/hamr/slang/js/main.js
+          retention-days: 5

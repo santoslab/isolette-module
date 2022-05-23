@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Isolette</title>
+    <style>
+        #log-container { overflow: auto; height: 300px; }
+
+        .log-warn { color: orange }
+        .log-error { color: red }
+        .log-info { color: skyblue }
+        .log-log { color: silver }
+
+        .log-warn, .log-error { font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<table>
+    <tr>
+        <td>Current Temperature</td><td><label id="current_temperature"></label></td>
+    </tr>
+    <tr>
+        <td>Regulator Status</td><td><label id="regulator_status"></label></td>
+    </tr>
+    <tr>
+        <td>Monitor Status</td><td><label id="monitor_status"></label></td>
+    </tr>
+    <tr>
+        <td>Alarm</td><td><label id="alarm"></label></td>
+    </tr>
+    <tr>
+        <td>Lower Desired Temperature</td><td><input id="lower_desired_temperature" type="number"></td>
+    </tr>
+    <tr>
+        <td>Upper Desired Temperature</td><td><input id="upper_desired_temperature" type="number"></td>
+    </tr>
+    <tr>
+        <td>Lower Alarm Temperature</td><td><input id="lower_alarm_temperature" type="number"></td>
+    </tr>
+    <tr>
+        <td>Upper Alarm Temperature</td><td><input id="upper_alarm_temperature" type="number"></td>
+    </tr>
+</table>
+
+<hr>
+
+<div id="log-container">
+    <pre id="log"></pre>
+</div>
+
+<script>
+// rewire console.log so that it's also displayed in the pre
+
+(function (log, container) {
+    console.old = console.log;
+    console.log = function () {
+        var output = "", arg, i;
+
+        for (i = 0; i < arguments.length; i++) {
+            arg = arguments[i];
+            output += "<span class=\"log-" + (typeof arg) + "\">";
+
+            if (typeof arg === "object" && typeof JSON === "object" && typeof JSON.stringify === "function") {
+                output += JSON.stringify(arg);
+            } else {
+                output += arg;
+            }
+
+            output += "</span>&nbsp;";
+        }
+
+        const isScrolledToBottom = container.scrollHeight - container.clientHeight <= container.scrollTop + 1;
+        log.innerHTML += output + "<br>";
+        if(isScrolledToBottom){
+          container.scrollTop = container.scrollHeight - container.clientHeight;
+        }
+
+        console.old.apply(undefined, arguments);
+    };
+})(document.getElementById("log"), document.getElementById("log-container"));
+</script>
+
+<script type="text/javascript" src="./js/main.js"></script>
+</body>
+</html>
