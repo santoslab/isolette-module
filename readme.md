@@ -20,7 +20,7 @@ mkdir ~/temp
 cd ~/temp
 git clone --rec https://github.com/sireum/kekinian
 
-cd ./hamr/codegen/arsit
+cd ./kekinian/hamr/codegen/arsit
 git checkout module
 git pull --recurse
 

@@ -35,25 +35,17 @@ jobs:
 
           REM build.cmd sometimes fails on windows when it tries to
           REM replace the in-use bin\sireum.jar with the freshly built one.
+          REM Workaround is to run command in a different cmd and then 
+          REM manually copy the jar over over afterwards
 
           cmd.exe /c %SIREUM_HOME%\bin\build.cmd setup
-
-          echo %ERRORLEVEL% after build.cmd
-          
-          dir %SIREUM_HOME%\out\sireum-proyek\assemble\
           copy %SIREUM_HOME%\out\sireum-proyek\assemble\sireum.jar %SIREUM_HOME%\bin
-         
-          echo %ERRORLEVEL% after copy jar
           
           set PATH=%SIREUM_HOME%\bin;%PATH%
 
           cmd.exe /c %SIREUM_HOME%\bin\install\fmide.cmd
-
-          echo %ERRORLEVEL% after fmide install
           
           cmd.exe /c %GITHUB_WORKSPACE%\isolette-module\aadl\bin\run-hamr-jvm.cmd
-
-          echo %ERRORLEVEL% after run-hamr-jvm
           
           cmd.exe /c %GITHUB_WORKSPACE%\isolette-module\hamr\slang\bin\scalajs.cmd
           
