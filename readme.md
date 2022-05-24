@@ -11,6 +11,8 @@
   <img src="https://github.com/santoslab/isolette-module/actions/workflows/CI-windows.yml/badge.svg" alt="Windows"></a>
 </tr></table>
 
+Click through one of the badges to download the CI artifacts (ie. the generated website/files)
+
 ## Build HAMR Codegen 'module' version of sireum.jar
 
 The following assumes you don't want to modify your current working version of ``sireum.jar``
@@ -50,6 +52,13 @@ git clone git@github.com:santoslab/isolette-module.git
 ```
 
 ## Regenerate Code
+
+Optionally remove all previously generated code that wasn't modified by the user 
+(e.g. keep component behavior code, code hooking up operating interfaces, library files)
+
+```bash
+./isolette-module/aadl/bin/clean.cmd
+```
 
 Refer to the run script
 [run-hamr-jvm.cmd](aadl/bin/run-hamr-jvm.cmd)

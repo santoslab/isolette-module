@@ -20,7 +20,7 @@ import org.sireum._
 
 val hamrDir = Os.slashDir.up.up / "hamr" / "slang"
 
-println("Only keep the user code in src/components and src/common/library")
+println("Deleting everything except user modified files")
 
 def del(p: Os.Path): Unit = {
   assert (p.exists, s"${p} does not exist")
@@ -28,8 +28,16 @@ def del(p: Os.Path): Unit = {
   println(s"Removed ${p}")
 }
 
+// keep the ExternalConfig<Js/Jvm> files in app folder,
+// keep files in components folder
+// keep files in common/library
+
 del(hamrDir / "bin")
-del(hamrDir / "src" / "app")
+del(hamrDir / "src" / "app" / "js" / "src" / "main" / "scala" / "isolette" / "config" / "AppPlatformJs.scala")
+del(hamrDir / "src" / "app" / "js" / "src" / "main" / "scala" / "isolette" / "Demo.scala")
+del(hamrDir / "src" / "app" / "jvm" / "src" / "main" / "scala" / "isolette" / "config" / "AppPlatformJvm.scala")
+del(hamrDir / "src" / "app" / "jvm" / "src" / "main" / "scala" / "isolette" / "Demo.scala")
+del(hamrDir / "src" / "app" / "shared")
 del(hamrDir / "src" / "common" / "data")
 del(hamrDir / "src" / "infrastructure")
 del(hamrDir / "src" / "inspector")
