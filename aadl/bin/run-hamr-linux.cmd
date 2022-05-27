@@ -39,10 +39,15 @@ val osireum = ISZ(fmide.string, "-nosplash", "-console", "-consoleLog", "-data",
 
 val codegenArgs = ISZ("hamr", "codegen",
   "--verbose",
-  "--platform", "JVM",
+  "--platform", "Linux",
   "--no-proyek-ive",
   "--output-dir", (aadlDir.up / "hamr" / "slang").string,
   "--package-name", "isolette",
+  "--output-c-dir", (aadlDir.up / "hamr" / "c").string,
+  "--run-transpiler",
+  "--bit-width", "32", 
+  "--max-string-size", "256",
+  "--max-array-size", "1",
   "--aadl-root-dir", aadlDir.string,
   (aadlDir / ".system").string)
 
