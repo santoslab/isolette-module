@@ -95,7 +95,8 @@ property set Isolette_Properties is
     
 --stack size   
   StackSize : constant
-    Size => 217088 Bytes; -- needs to be 4K aligned for seL4
+ -- Size => 217088 Bytes; -- needs to be 4K aligned for seL4
+    Size => 229376 Bytes; -- and also needs to be 16K aligned for clang
     
 end Isolette_Properties;  
 

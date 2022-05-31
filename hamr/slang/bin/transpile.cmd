@@ -65,7 +65,7 @@ var project: ISZ[String] = Cli(Os.pathSepChar).parseTranspile(Os.cliArgs, 0) mat
         "--sequence", s"IS[Z,art.Bridge]=9;MS[Z,Option[art.Bridge]]=9;IS[Z,art.UPort]=9;IS[Z,art.UConnection]=25",
         "--constants", s"art.Art.maxComponents=9;art.Art.maxPorts=57",
         "--forward", "art.ArtNative=isolette.ArtNix,isolette.Platform=isolette.PlatformNix",
-        "--stack-size", "217088",
+        "--stack-size", "229376",
         "--stable-type-id",
         "--exts", s"${SCRIPT_HOME}/../../c/ext-c${PATH_SEP}${SCRIPT_HOME}/../../c/etc",
         "--verbose")
@@ -108,7 +108,7 @@ var project: ISZ[String] = Cli(Os.pathSepChar).parseTranspile(Os.cliArgs, 0) mat
         "--sequence", s"IS[Z,art.Bridge]=9;MS[Z,Option[art.Bridge]]=9;IS[Z,art.UPort]=9;IS[Z,art.UConnection]=25",
         "--constants", s"art.Art.maxComponents=9;art.Art.maxPorts=57",
         "--forward", "art.ArtNative=art.ArtNativeSlang",
-        "--stack-size", "217088",
+        "--stack-size", "229376",
         "--stable-type-id",
         "--exts", s"${SCRIPT_HOME}/../../c/ext-schedule${PATH_SEP}${SCRIPT_HOME}/../../c/ext-c${PATH_SEP}${SCRIPT_HOME}/../../c/etc",
         "--verbose")
