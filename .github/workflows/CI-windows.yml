@@ -15,17 +15,30 @@ jobs:
         with:
           submodules: recursive
           path: isolette-module
+      - name: Install Cygwin
+        shell: cmd
+        run: |
+          choco config get cacheLocation
+          choco install --no-progress cygwin
+          C:\tools\cygwin\cygwinsetup.exe -qgnNdO -R C:/tools/cygwin -s http://mirrors.kernel.org/sourceware/cygwin/ -P gcc-core,gcc-g++,make,cmake          
       - name: Cache ScalaJS Standalone
         id: cache-scalajs
         uses: actions/cache@v2
         with:
           path: isolette-module\hamr\slang\lib
           key: ${{ runner.os }}-1.7.1-scalajs
+      - name: Check LongPathsEnabled
+        run: |
+          (Get-ItemProperty "HKLM:System\CurrentControlSet\Control\FileSystem").LongPathsEnabled          
       - name: Test
         shell: cmd
         run: |
           xcopy %GITHUB_WORKSPACE%\cache\coursier %HOMEDRIVE%%HOMEPATH%\cache\coursier\ /E/H
           set COURSIER_CACHE=%HOMEDRIVE%%HOMEPATH%\cache\coursier
+
+          set PATH=C:\tools\cygwin\bin;C:\tools\cygwin\usr\bin;%PATH%
+          set CC=gcc.exe
+          set CXX=c++.exe
 
           cd /d %GITHUB_WORKSPACE%
 
@@ -59,9 +72,11 @@ jobs:
           
           call %GITHUB_WORKSPACE%\isolette-module\aadl\bin\clean.cmd
           
-          call %GITHUB_WORKSPACE%\isolette-module\aadl\bin\run-hamr-jvm.cmd
+          call %GITHUB_WORKSPACE%\isolette-module\aadl\bin\run-hamr-linux.cmd
           
           call %GITHUB_WORKSPACE%\isolette-module\hamr\slang\bin\scalajs.cmd
+
+          call %GITHUB_WORKSPACE%\isolette-module\hamr\c\bin\compile.cmd
           
       - name: 'Upload JS'
         uses: actions/upload-artifact@v3
