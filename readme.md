@@ -26,8 +26,8 @@ cd ./kekinian/hamr/codegen/arsit
 git checkout module
 git pull --recurse
 
-cd ../../../                 # cd back to the root kekinian directory
-./bin/build.cmd setup
+cd ../../../     # cd back to the root kekinian directory
+./bin/build.cmd  # DO NOT PASS THE setup ARGUMENT -- see 'Opening in IVE'!
 ```
 
 The rest of this readme assumes you've run the following in the shell you're using
@@ -70,6 +70,17 @@ From the command line you'd do:
 ./isolette-module/aadl/bin/run-hamr-jvm.cmd
 ```
 
+## Opening in IVE
+
+Realistically you can only have one installation each of IVE-Dev and IVE-Ultimate so the 
+build steps above didn't install IVE under `$SIREUM_HOME/bin/`.  Hence the run scripts
+use the `no-proyek-ive` codegen option meaning you have run proyek ive yourself.  Assuming 
+your pristine copy of Sireum kekinian is at `$SIREUM_HOME_PRISTINE`, do the following
+
+```bash
+$SIREUM_HOME_PRISTINE/bin/sireum proyek ive ./isolette-module
+```
+
 ## Running on JVM
 
 Refer to the comments in [hamr/slang/bin/project.cmd](hamr/slang/bin/project.cmd)
@@ -93,3 +104,24 @@ or on Mac
 ```bash
 open ./isolette-module/hamr/slang/index.html
 ```
+
+## Running Under Linux
+
+Run the following script that adds additional Slang code to your project along with the necessary C infrastructure code.
+
+```bash
+./isolette-module/aadl/bin/run-hamr-linux.cmd
+```
+
+Any Slang code reachable from the JVM Demo's main method will be transpiled down to C automatically
+since codegen'e `run-transpiler` option is used. This includes component behavior code since 
+the `exclude-component-impl` option was not used.  Therefore you only need to implement the extension
+methods in C as is done in [./hamr/c/ext-c/ext.c](./hamr/c/ext-c/ext.c) for this project.
+
+Now compile and run the code (you'll of course need a C compiler like gcc and CMake)
+
+```bash
+./isolette-module/hamr/c/bin/compile.cmd
+./isolette-module/hamr/c/bin/run.cmd
+```
+

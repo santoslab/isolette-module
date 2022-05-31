@@ -18,28 +18,37 @@ exit /B %errorlevel%
 
 import org.sireum._
 
-val hamrDir = Os.slashDir.up.up / "hamr" / "slang"
+val hamrDir = Os.slashDir.up.up / "hamr"
 
 println("Deleting everything except user modified files")
 
 def del(p: Os.Path): Unit = {
-  assert (p.exists, s"${p} does not exist")
-  p.removeAll()
-  println(s"Removed ${p}")
+  if(p.exists){
+    p.removeAll()
+    println(s"Removed ${p}")
+  }
 }
 
 // keep the ExternalConfig<Js/Jvm> files in app folder,
 // keep files in components folder
 // keep files in common/library
 
-del(hamrDir / "bin")
-del(hamrDir / "src" / "app" / "js" / "src" / "main" / "scala" / "isolette" / "config" / "AppPlatformJs.scala")
-del(hamrDir / "src" / "app" / "js" / "src" / "main" / "scala" / "isolette" / "Demo.scala")
-del(hamrDir / "src" / "app" / "jvm" / "src" / "main" / "scala" / "isolette" / "config" / "AppPlatformJvm.scala")
-del(hamrDir / "src" / "app" / "jvm" / "src" / "main" / "scala" / "isolette" / "Demo.scala")
-del(hamrDir / "src" / "app" / "shared")
-del(hamrDir / "src" / "common" / "data")
-del(hamrDir / "src" / "infrastructure")
-del(hamrDir / "src" / "inspector")
-del(hamrDir / "src" / "test")
-del(hamrDir / "versions.properties")
+val slangDir = hamrDir / "slang"
+del(slangDir / "bin")
+del(slangDir / "src" / "app" / "js" / "src" / "main" / "scala" / "isolette" / "config" / "AppPlatformJs.scala")
+del(slangDir / "src" / "app" / "js" / "src" / "main" / "scala" / "isolette" / "Demo.scala")
+del(slangDir / "src" / "app" / "jvm" / "src" / "main" / "scala" / "isolette" / "config" / "AppPlatformJvm.scala")
+del(slangDir / "src" / "app" / "jvm" / "src" / "main" / "scala" / "isolette" / "Demo.scala")
+del(slangDir / "src" / "app" / "shared")
+del(slangDir / "src" / "common" / "data")
+del(slangDir / "src" / "infrastructure")
+del(slangDir / "src" / "inspector")
+del(slangDir / "src" / "test")
+del(slangDir / "versions.properties")
+
+val cDir = hamrDir / "c"
+del(cDir / "bin")
+del(cDir / "etc")
+del(cDir / "etc-c" / "ext.h")
+del(cDir / "ext-schedule")
+del(cDir / "nix")
