@@ -33,7 +33,7 @@ Cli(Os.pathSepChar).parseCompile(Os.cliArgs, 0) match {
 
     if((nixDir / "CMakeCache.txt").exists) {
       // remove cached transpiler variables
-      proc"cmake -U BOUND_CHECK -U NO_PRINT -U RANGE_CHECK -U WITH_LOC ..".at(nixDir).console.run()
+      proc"cmake -U BOUND_CHECK -U NO_PRINT -U RANGE_CHECK -U WITH_LOC ..".at(nixDir).console.runCheck()
     }
 
     var cmake: ISZ[String] = ISZ("cmake")
@@ -43,31 +43,34 @@ Cli(Os.pathSepChar).parseCompile(Os.cliArgs, 0) match {
     if(o.withLoc) { cmake = cmake :+ "-D" :+ "WITH_LOC=ON" }
     cmake = (cmake :+ "-D" :+ "CMAKE_BUILD_TYPE=Release") :+ ".."
 
-    if(Os.proc(cmake).at(nixDir).console.run().ok) {
-      val MAKE_ARGS: String = Os.env("MAKE_ARGS") match {
-        case Some(o) => o
-        case _ => ""
-      }
-      if(proc"make --jobs ${o.jobs} ${MAKE_ARGS}".at(nixDir).console.run().ok) {
-        val binDir = home / "slang-build"
-        binDir.removeAll()
-        binDir.mkdir()
+    Os.proc(cmake).at(nixDir).console.runCheck()
 
-        if(Os.isWin) {
-          nixDir.list.filter(p => p.ext == "exe").foreach((f: Os.Path) => f.moveTo(binDir / f.name))
-        } else {
-          nixDir.list.filter(p => ops.StringOps(p.name).endsWith("_App")).foreach((f: Os.Path) => f.moveTo(binDir / f.name))
-          val candidates: ISZ[Os.Path] = ISZ[String]("Demo", "LegacyDemo").map((m: String) => nixDir / m)
-          val main: ISZ[Os.Path] = candidates.filter((p: Os.Path) => p.exists)
-          if(main.isEmpty || main.size > 1) {
-            eprintln(s"Found ${main.size} possible main programs.  There should be only one of the following: ${candidates}")
-            Os.exit(1)
-          }
-          main(0).moveTo(binDir / main(0).name)
-        }
-        Os.exit(0)
-      }
+    val MAKE_ARGS: String = Os.env("MAKE_ARGS") match {
+      case Some(o) => o
+      case _ => ""
     }
+
+    proc"make --jobs ${o.jobs} ${MAKE_ARGS}".at(nixDir).console.runCheck()
+
+    val binDir = home / "slang-build"
+    binDir.removeAll()
+    binDir.mkdir()
+
+    if(Os.isWin) {
+      nixDir.list.filter(p => p.ext == "exe").foreach((f: Os.Path) => f.moveTo(binDir / f.name))
+    } else {
+      nixDir.list.filter(p => ops.StringOps(p.name).endsWith("_App")).foreach((f: Os.Path) => f.moveTo(binDir / f.name))
+      val candidates: ISZ[Os.Path] = ISZ[String]("Demo", "LegacyDemo").map((m: String) => nixDir / m)
+      val main: ISZ[Os.Path] = candidates.filter((p: Os.Path) => p.exists)
+      if(main.isEmpty || main.size > 1) {
+        eprintln(s"Found ${main.size} possible main programs.  There should be only one of the following: ${candidates}")
+        Os.exit(1)
+      }
+      main(0).moveTo(binDir / main(0).name)
+    }
+
+    Os.exit(0)
+
   case Some(o: Cli.CompileOption) =>
     println(o.help)
     Os.exit(0)

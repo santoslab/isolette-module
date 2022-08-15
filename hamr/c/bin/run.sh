@@ -9,6 +9,9 @@ cd $SCRIPT_HOME
 # Uncomment the following to prevent terminal from closing when the app shuts down or crashes
 #PREVENT_CLOSE="; bash -i"
 
+# check if getopt supports long options
+getopt -T > /dev/null || ret=$?
+[[ $ret -eq 4 ]] && GNU_GETOPT=0 || GNU_GETOPT=1
 
 OPTIONS=s:h
 LONGOPTS=scheduler:,help
@@ -18,16 +21,28 @@ function usage {
   echo "Usage: <option>*"
   echo ""
   echo "Available Options:"
-  echo "-s, --scheduler        The scheduler to use (expects one of"
-  echo "                         { default, roundRobin, static, legacy};"
-  echo "                         default: default)"
-  echo "-h, --help             Display this information"
+  if [[ $GNU_GETOPT -eq 0 ]]; then
+    echo "-s, --scheduler        The scheduler to use (expects one of"
+    echo "                         { default, roundRobin, static, legacy};"
+    echo "                         default: default)"
+    echo "-h, --help             Display this information"
+  else
+    echo "-s                     The scheduler to use (expects one of"
+    echo "                         { default, roundRobin, static, legacy};"
+    echo "                         default: default)"
+    echo "-h                     Display this information"
+  fi
 }
 
-! PARSED=$(getopt --options=$OPTIONS --longoptions=$LONGOPTS --name "$0" -- "$@")
+if [[ $GNU_GETOPT -eq 0 ]]; then
+  ! PARSED=$(getopt --options=$OPTIONS --longoptions=$LONGOPTS --name "$0" -- "$@")
+else
+  ! PARSED=$(getopt $OPTIONS "$@")
+fi
+
 if [[ ${PIPESTATUS[0]} -ne 0 ]]; then
-    usage
-    exit 1
+  usage
+  exit 1
 fi
 
 eval set -- "$PARSED"
@@ -60,11 +75,11 @@ function launch() {
   if [ "$2" ]; then SCHEDULER_ARG=" -s ${2}"; fi
   if [ -n "$COMSPEC" -a -x "$COMSPEC" ]; then
     for APP in $1; do
-      cygstart mintty /bin/bash "slang-build/${APP}${SCHEDULER_ARG}${PREVENT_CLOSE}" &
+      cygstart mintty /bin/bash -c "slang-build/${APP}${SCHEDULER_ARG}${PREVENT_CLOSE}" &
     done
   elif [[ "$(uname)" == "Darwin" ]]; then
     for APP in $1; do
-      open -a Terminal "slang-build/${APP}${SCHEDULER_ARG}${PREVENT_CLOSE}" &
+      echo "${SCRIPT_HOME}/slang-build/${APP}${SCHEDULER_ARG}${PREVENT_CLOSE} ; rm /tmp/tmp.sh" > /tmp/tmp.sh ; chmod +x /tmp/tmp.sh ; open -a Terminal /tmp/tmp.sh &
     done
   elif [[ "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; then
     for APP in $1; do
