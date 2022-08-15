@@ -45,8 +45,10 @@ jobs:
           
           $GITHUB_WORKSPACE/isolette-module/aadl/bin/run-hamr-linux.cmd
 
+          $GITHUB_WORKSPACE/isolette-module/aadl/bin/stacksize-fix.cmd
+          
           $GITHUB_WORKSPACE/isolette-module/hamr/slang/bin/scalajs.cmd
-
+          
           $GITHUB_WORKSPACE/isolette-module/hamr/c/bin/compile.cmd
           
       - name: 'Upload JS'

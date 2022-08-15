@@ -73,6 +73,8 @@ jobs:
           call %GITHUB_WORKSPACE%\isolette-module\aadl\bin\clean.cmd
           
           call %GITHUB_WORKSPACE%\isolette-module\aadl\bin\run-hamr-linux.cmd
+
+          call %GITHUB_WORKSPACE%\isolette-module\aadl\bin\stacksize-fix.cmd
           
           call %GITHUB_WORKSPACE%\isolette-module\hamr\slang\bin\scalajs.cmd
 
