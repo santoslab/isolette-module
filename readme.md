@@ -61,7 +61,7 @@ Optionally remove all previously generated code that wasn't modified by the user
 ```
 
 Refer to the run script
-[run-hamr-jvm.cmd](aadl/bin/run-hamr-jvm.cmd)
+[run-hamr-jvm.cmd](aadl/bin/run-hamr-linux.cmd)
 to see what options were passed to codegen if you want to generate code from inside FMIDE.  
 
 From the command line you'd do:
@@ -78,7 +78,7 @@ use the `no-proyek-ive` codegen option meaning you have run proyek ive yourself.
 your pristine copy of Sireum kekinian is at `$SIREUM_HOME_PRISTINE`, do the following
 
 ```bash
-$SIREUM_HOME_PRISTINE/bin/sireum proyek ive ./isolette-module
+$SIREUM_HOME_PRISTINE/bin/sireum proyek ive ./isolette-module/hamr/slang
 ```
 
 ## Running on JVM
@@ -113,6 +113,13 @@ Run the following script that adds additional Slang code to your project along w
 ./isolette-module/aadl/bin/run-hamr-linux.cmd
 ```
 
+
+If you're on Mac or Windows then modify the stack-size using [stacksize-fix.cmd](aadl/bin/stacksize-fix.cmd).  Note this could also be done by modifying the ``StackSize`` [property](aadl/aadl/propertysets/Isolette_Properties.aadl#L97) in the model (or by modifying the ``stack-size`` argument in the generated [transpile.cmd](hamr/slang/bin/transpile.cmd#L111)).  However, the required Mac/Windows values are much larger than what is needed for Linux/seL4.
+
+```bash
+./isolette-module/aadl/bin/stacksize-fix.cmd
+```
+
 Any Slang code reachable from the JVM Demo's main method will be transpiled down to C automatically
 since codegen'e `run-transpiler` option is used. This includes component behavior code since 
 the `exclude-component-impl` option was not used.  Therefore you only need to implement the extension
@@ -122,6 +129,6 @@ Now compile and run the code (you'll of course need a C compiler like gcc and CM
 
 ```bash
 ./isolette-module/hamr/c/bin/compile.cmd
-./isolette-module/hamr/c/bin/run.cmd
+./isolette-module/hamr/c/bin/run.sh
 ```
 

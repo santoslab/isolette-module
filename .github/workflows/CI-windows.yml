@@ -79,6 +79,8 @@ jobs:
           call %GITHUB_WORKSPACE%\isolette-module\hamr\slang\bin\scalajs.cmd
 
           call %GITHUB_WORKSPACE%\isolette-module\hamr\c\bin\compile.cmd
+
+          call %GITHUB_WORKSPACE%\isolette-module\hamr\c\bin\runCI.cmd
           
       - name: 'Upload JS'
         uses: actions/upload-artifact@v3

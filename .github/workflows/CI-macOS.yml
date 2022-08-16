@@ -51,6 +51,8 @@ jobs:
 
           $GITHUB_WORKSPACE/isolette-module/hamr/c/bin/compile.cmd
           
+          $GITHUB_WORKSPACE/isolette-module/hamr/c/bin/runCI.cmd
+          
       - name: 'Upload JS'
         uses: actions/upload-artifact@v3
         with:
