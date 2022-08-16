@@ -34,4 +34,13 @@ val cmakeLists = cBinDir.up / "nix" / "CMakeLists.txt"
 println(cmakeLists.read)
 
 println("------------ B E G I N   D E M O   O U T P U T --------------")
-proc"${demoBin}".timeout(7000).console.run()
+
+val results = proc"${demoBin}".timeout(7000).console.run()
+
+println("------------ E N D   D E M O   O U T P U T --------------")
+
+println("stdout proc stream")
+println(results.out)
+
+println("stderr proc stream")
+eprintln(results.err)
