@@ -18,7 +18,7 @@ exit /B %errorlevel%
 
 import org.sireum._
 
-val cBinDir = Os.slashDir
+val cBinDir = Os.slashDir.up.up / "hamr" / "c" / "bin"
 
 // the run script forks off the process in a separate
 // terminal so we'd lose our handle to it.  Instead just
