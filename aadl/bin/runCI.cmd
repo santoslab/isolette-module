@@ -25,4 +25,13 @@ val cBinDir = Os.slashDir.up.up / "hamr" / "c" / "bin"
 // invoke Demo directly
 val demoBin = cBinDir / "slang-build" / (if (Os.isWin) "Demo.exe" else "Demo")
 
+println("-------------------------------------------------")
+println(s"Attempting to run the C demo at ${demoBin.value}")
+println("-------------------------------------------------")
+
+println("It will use the following CMakeLists.txt")
+val cmakeLists = cBinDir.up / "nix" / "CMakeLists.txt"
+println(cmakeLists.read)
+
+println("------------ B E G I N   D E M O   O U T P U T --------------")
 proc"${demoBin}".timeout(7000).console.run()
