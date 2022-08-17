@@ -25,22 +25,30 @@ val cBinDir = Os.slashDir.up.up / "hamr" / "c" / "bin"
 // invoke Demo directly
 val demoBin = cBinDir / "slang-build" / (if (Os.isWin) "Demo.exe" else "Demo")
 
-println("-------------------------------------------------")
-println(s"Attempting to run the C demo at ${demoBin.value}")
-println("-------------------------------------------------")
+val to: Z = if(Os.isMac) 30000 else 10000
+
+println("-------------------------------------------------------------")
+println(s"Attempting to run the C demo for ${to}ms at ${demoBin.value}")
+println("-------------------------------------------------------------")
 
 println("It will use the following CMakeLists.txt")
 val cmakeLists = cBinDir.up / "nix" / "CMakeLists.txt"
 println(cmakeLists.read)
 
-println("------------ B E G I N   D E M O   O U T P U T --------------")
+println(s"Demo exists? ${demoBin.exists}")
+if(Os.isMac) {
+  proc"ls -laig ${demoBin.up}".console.run()
+}
+println("------------ B E G I N   ${to}ms  O F  D E M O   O U T P U T --------------")
 
-val results = proc"${demoBin}".timeout(7000).console.run()
+val results = proc"${demoBin}".timeout(to).console.run()
 
 println("------------ E N D   D E M O   O U T P U T --------------")
 
-println("stdout proc stream")
+println(s"exitcode: ${results.exitCode}")
+
+println("stdout proc stream:")
 println(results.out)
 
-println("stderr proc stream")
+println("stderr proc stream:")
 eprintln(results.err)
