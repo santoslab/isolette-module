@@ -6,7 +6,7 @@ import org.sireum._
 import art._
 import isolette._
 
-@sig trait Manage_Heat_Source_impl_Api {
+@sig trait Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source_Api {
   def id: Art.BridgeId
   def current_tempWstatus_Id : Art.PortId
   def lower_desired_temp_Id : Art.PortId
@@ -31,21 +31,21 @@ import isolette._
   }
 }
 
-@datatype class Manage_Heat_Source_impl_Initialization_Api (
+@datatype class Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source_Initialization_Api (
   val id: Art.BridgeId,
   val current_tempWstatus_Id : Art.PortId,
   val lower_desired_temp_Id : Art.PortId,
   val upper_desired_temp_Id : Art.PortId,
   val regulator_mode_Id : Art.PortId,
-  val heat_control_Id : Art.PortId) extends Manage_Heat_Source_impl_Api
+  val heat_control_Id : Art.PortId) extends Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source_Api
 
-@datatype class Manage_Heat_Source_impl_Operational_Api (
+@datatype class Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source_Operational_Api (
   val id: Art.BridgeId,
   val current_tempWstatus_Id : Art.PortId,
   val lower_desired_temp_Id : Art.PortId,
   val upper_desired_temp_Id : Art.PortId,
   val regulator_mode_Id : Art.PortId,
-  val heat_control_Id : Art.PortId) extends Manage_Heat_Source_impl_Api {
+  val heat_control_Id : Art.PortId) extends Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source_Api {
 
   def get_current_tempWstatus() : Option[Isolette_Data_Model.TempWstatus_impl] = {
     val value : Option[Isolette_Data_Model.TempWstatus_impl] = Art.getValue(current_tempWstatus_Id) match {

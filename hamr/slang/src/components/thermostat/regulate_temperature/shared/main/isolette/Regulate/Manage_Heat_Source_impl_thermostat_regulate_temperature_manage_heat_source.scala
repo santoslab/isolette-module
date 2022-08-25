@@ -39,7 +39,7 @@ object Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_sourc
   // Initialize Entry Point
   //======================================
 
-  def initialise(api: Manage_Heat_Source_impl_Initialization_Api): Unit = {
+  def initialise(api: Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source_Initialization_Api): Unit = {
     /*
     Contract(
       // ToDo: we need to be able eventually to specify that specific ports were
@@ -67,7 +67,7 @@ object Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_sourc
   // Compute Entry Point
   //======================================
 
-  def timeTriggered(api: Manage_Heat_Source_impl_Operational_Api): Unit = {
+  def timeTriggered(api: Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source_Operational_Api): Unit = {
     //  Latency: < Allowed Heat Source Latency
 
     // Note:  There are multiple possible styles for formalizing the requirements above.
@@ -201,11 +201,11 @@ object Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_sourc
     // Deduce( |- (lastCmd == Isolette_Data_Model.On_Off.Onn))  // should fail
   }
 
-  def activate(api: Manage_Heat_Source_impl_Operational_Api): Unit = { }
+  def activate(api: Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source_Operational_Api): Unit = { }
 
-  def deactivate(api: Manage_Heat_Source_impl_Operational_Api): Unit = { }
+  def deactivate(api: Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source_Operational_Api): Unit = { }
 
-  def finalise(api: Manage_Heat_Source_impl_Operational_Api): Unit = { }
+  def finalise(api: Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source_Operational_Api): Unit = { }
 
-  def recover(api: Manage_Heat_Source_impl_Operational_Api): Unit = { }
+  def recover(api: Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source_Operational_Api): Unit = { }
 }

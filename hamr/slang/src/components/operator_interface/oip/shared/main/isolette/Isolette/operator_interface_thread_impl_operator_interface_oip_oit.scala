@@ -27,14 +27,14 @@ object operator_interface_thread_impl_operator_interface_oip_oit {
 
   var firstInvocation: B = T
 
-  def initialise(api: operator_interface_thread_impl_Initialization_Api): Unit = {
+  def initialise(api: operator_interface_thread_impl_operator_interface_oip_oit_Initialization_Api): Unit = {
     api.put_lower_desired_tempWstatus(initLowerDesiredTempWstatus)
     api.put_upper_desired_tempWstatus(initUpperDesiredTempWstatus)
     api.put_lower_alarm_tempWstatus(initLowerAlarmTempWstatus)
     api.put_upper_alarm_tempWstatus(initUpperAlarmTempWstatus)
   }
 
-  def timeTriggered(api: operator_interface_thread_impl_Operational_Api): Unit = {
+  def timeTriggered(api: operator_interface_thread_impl_operator_interface_oip_oit_Operational_Api): Unit = {
 
     if(firstInvocation) {
       Interface.initialise(
@@ -79,13 +79,13 @@ object operator_interface_thread_impl_operator_interface_oip_oit {
     }
   }
 
-  def activate(api: operator_interface_thread_impl_Operational_Api): Unit = { }
+  def activate(api: operator_interface_thread_impl_operator_interface_oip_oit_Operational_Api): Unit = { }
 
-  def deactivate(api: operator_interface_thread_impl_Operational_Api): Unit = { }
+  def deactivate(api: operator_interface_thread_impl_operator_interface_oip_oit_Operational_Api): Unit = { }
 
-  def finalise(api: operator_interface_thread_impl_Operational_Api): Unit = {
+  def finalise(api: operator_interface_thread_impl_operator_interface_oip_oit_Operational_Api): Unit = {
     Interface.finalise()
   }
 
-  def recover(api: operator_interface_thread_impl_Operational_Api): Unit = { }
+  def recover(api: operator_interface_thread_impl_operator_interface_oip_oit_Operational_Api): Unit = { }
 }

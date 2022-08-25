@@ -32,7 +32,7 @@ object Manage_Alarm_impl_thermostat_monitor_temperature_manage_alarm {
   // Initialize Entry Point
   //======================================
 
-  def initialise(api: Manage_Alarm_impl_Initialization_Api): Unit = {
+  def initialise(api: Manage_Alarm_impl_thermostat_monitor_temperature_manage_alarm_Initialization_Api): Unit = {
     // TODO: There is a bit of a conceptual glitch here since following the
     //   AADL model of computation we should initialize all values here --
     //   There should be no notion of initializing execution outside of the
@@ -56,7 +56,7 @@ object Manage_Alarm_impl_thermostat_monitor_temperature_manage_alarm {
   //======================================
   // Compute Entry Point
   //======================================
-  def timeTriggered(api: Manage_Alarm_impl_Operational_Api): Unit = {
+  def timeTriggered(api: Manage_Alarm_impl_thermostat_monitor_temperature_manage_alarm_Operational_Api): Unit = {
     /*
     Contract(
       // ToDo: Need to account for constraints (assumptions) on lower and upper alarm bounds (which
@@ -255,11 +255,11 @@ object Manage_Alarm_impl_thermostat_monitor_temperature_manage_alarm {
   }
 
 
-  def activate(api: Manage_Alarm_impl_Operational_Api): Unit = { }
+  def activate(api: Manage_Alarm_impl_thermostat_monitor_temperature_manage_alarm_Operational_Api): Unit = { }
 
-  def deactivate(api: Manage_Alarm_impl_Operational_Api): Unit = { }
+  def deactivate(api: Manage_Alarm_impl_thermostat_monitor_temperature_manage_alarm_Operational_Api): Unit = { }
 
-  def finalise(api: Manage_Alarm_impl_Operational_Api): Unit = { }
+  def finalise(api: Manage_Alarm_impl_thermostat_monitor_temperature_manage_alarm_Operational_Api): Unit = { }
 
-  def recover(api: Manage_Alarm_impl_Operational_Api): Unit = { }
+  def recover(api: Manage_Alarm_impl_thermostat_monitor_temperature_manage_alarm_Operational_Api): Unit = { }
 }

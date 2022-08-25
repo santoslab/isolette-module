@@ -12,10 +12,10 @@ object Heat_Source_impl_heat_source_cpi_heat_controller {
   //   should we represent the internal state as an Isolette_Data_Model.On_Off.Type value?
   var heater_state : Option[Isolette_Data_Model.On_Off.Type] = None[Isolette_Data_Model.On_Off.Type]()
 
-  def initialise(api: Heat_Source_impl_Initialization_Api): Unit = {
+  def initialise(api: Heat_Source_impl_heat_source_cpi_heat_controller_Initialization_Api): Unit = {
   }
 
-  def timeTriggered(api: Heat_Source_impl_Operational_Api): Unit = {
+  def timeTriggered(api: Heat_Source_impl_heat_source_cpi_heat_controller_Operational_Api): Unit = {
     if(api.get_heat_control().nonEmpty){
       if(heater_state != api.get_heat_control()) {
         heater_state = api.get_heat_control()
@@ -25,13 +25,13 @@ object Heat_Source_impl_heat_source_cpi_heat_controller {
     }
   }
 
-  def activate(api: Heat_Source_impl_Operational_Api): Unit = { }
+  def activate(api: Heat_Source_impl_heat_source_cpi_heat_controller_Operational_Api): Unit = { }
 
-  def deactivate(api: Heat_Source_impl_Operational_Api): Unit = { }
+  def deactivate(api: Heat_Source_impl_heat_source_cpi_heat_controller_Operational_Api): Unit = { }
 
-  def finalise(api: Heat_Source_impl_Operational_Api): Unit = { }
+  def finalise(api: Heat_Source_impl_heat_source_cpi_heat_controller_Operational_Api): Unit = { }
 
-  def recover(api: Heat_Source_impl_Operational_Api): Unit = { }
+  def recover(api: Heat_Source_impl_heat_source_cpi_heat_controller_Operational_Api): Unit = { }
 }
 
 @ext object Heat_Source_Native {

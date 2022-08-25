@@ -50,8 +50,8 @@ import isolette.Monitor.{Manage_Monitor_Interface_impl_thermostat_monitor_temper
     eventOuts = ISZ()
   )
 
-  val initialization_api : Manage_Monitor_Interface_impl_Initialization_Api = {
-    val api = Manage_Monitor_Interface_impl_Initialization_Api(
+  val initialization_api : Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monitor_interface_Initialization_Api = {
+    val api = Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monitor_interface_Initialization_Api(
       id,
       upper_alarm_tempWstatus.id,
       lower_alarm_tempWstatus.id,
@@ -66,8 +66,8 @@ import isolette.Monitor.{Manage_Monitor_Interface_impl_thermostat_monitor_temper
     api
   }
 
-  val operational_api : Manage_Monitor_Interface_impl_Operational_Api = {
-    val api = Manage_Monitor_Interface_impl_Operational_Api(
+  val operational_api : Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monitor_interface_Operational_Api = {
+    val api = Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monitor_interface_Operational_Api(
       id,
       upper_alarm_tempWstatus.id,
       lower_alarm_tempWstatus.id,
@@ -103,8 +103,8 @@ import isolette.Monitor.{Manage_Monitor_Interface_impl_thermostat_monitor_temper
 
 object Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monitor_interface_Bridge {
 
-  var c_initialization_api: Option[Manage_Monitor_Interface_impl_Initialization_Api] = None()
-  var c_operational_api: Option[Manage_Monitor_Interface_impl_Operational_Api] = None()
+  var c_initialization_api: Option[Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monitor_interface_Initialization_Api] = None()
+  var c_operational_api: Option[Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monitor_interface_Operational_Api] = None()
 
   @datatype class EntryPoints(
     Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monitor_interface_BridgeId : Art.BridgeId,
@@ -120,8 +120,8 @@ object Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monit
 
     dispatchTriggers : Option[ISZ[Art.PortId]],
 
-    initialization_api: Manage_Monitor_Interface_impl_Initialization_Api,
-    operational_api: Manage_Monitor_Interface_impl_Operational_Api) extends Bridge.EntryPoints {
+    initialization_api: Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monitor_interface_Initialization_Api,
+    operational_api: Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monitor_interface_Operational_Api) extends Bridge.EntryPoints {
 
     val dataInPortIds: ISZ[Art.PortId] = ISZ(upper_alarm_tempWstatus_Id,
                                              lower_alarm_tempWstatus_Id,
@@ -140,7 +140,7 @@ object Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monit
     def compute(): Unit = {
       Art.receiveInput(eventInPortIds, dataInPortIds)
 
-      // implement the following in 'component':  def timeTriggered(api: Manage_Monitor_Interface_impl_Operational_Api): Unit = {}
+      // implement the following in 'component':  def timeTriggered(api: Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monitor_interface_Operational_Api): Unit = {}
       component.timeTriggered(operational_api)
 
       Art.sendOutput(eventOutPortIds, dataOutPortIds)
@@ -150,35 +150,35 @@ object Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monit
     def testCompute(): Unit = {
       Art.receiveInput(eventInPortIds, dataInPortIds)
 
-      // implement the following in 'component':  def timeTriggered(api: Manage_Monitor_Interface_impl_Operational_Api): Unit = {}
+      // implement the following in 'component':  def timeTriggered(api: Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monitor_interface_Operational_Api): Unit = {}
       component.timeTriggered(operational_api)
 
       Art.releaseOutput(eventOutPortIds, dataOutPortIds)
     }
 
     def activate(): Unit = {
-      // implement the following method in 'component':  def activate(api: Manage_Monitor_Interface_impl_Operational_Api): Unit = {}
+      // implement the following method in 'component':  def activate(api: Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monitor_interface_Operational_Api): Unit = {}
       component.activate(operational_api)
     }
 
     def deactivate(): Unit = {
-      // implement the following method in 'component':  def deactivate(api: Manage_Monitor_Interface_impl_Operational_Api): Unit = {}
+      // implement the following method in 'component':  def deactivate(api: Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monitor_interface_Operational_Api): Unit = {}
       component.deactivate(operational_api)
     }
 
     def finalise(): Unit = {
-      // implement the following method in 'component':  def finalise(api: Manage_Monitor_Interface_impl_Operational_Api): Unit = {}
+      // implement the following method in 'component':  def finalise(api: Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monitor_interface_Operational_Api): Unit = {}
       component.finalise(operational_api)
     }
 
     def initialise(): Unit = {
-      // implement the following method in 'component':  def initialise(api: Manage_Monitor_Interface_impl_Initialization_Api): Unit = {}
+      // implement the following method in 'component':  def initialise(api: Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monitor_interface_Initialization_Api): Unit = {}
       component.initialise(initialization_api)
       Art.sendOutput(eventOutPortIds, dataOutPortIds)
     }
 
     def recover(): Unit = {
-      // implement the following method in 'component':  def recover(api: Manage_Monitor_Interface_impl_Operational_Api): Unit = {}
+      // implement the following method in 'component':  def recover(api: Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monitor_interface_Operational_Api): Unit = {}
       component.recover(operational_api)
     }
   }

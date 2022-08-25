@@ -6,7 +6,7 @@ import org.sireum._
 import art._
 import isolette._
 
-@sig trait operator_interface_thread_impl_Api {
+@sig trait operator_interface_thread_impl_operator_interface_oip_oit_Api {
   def id: Art.BridgeId
   def regulator_status_Id : Art.PortId
   def monitor_status_Id : Art.PortId
@@ -46,7 +46,7 @@ import isolette._
   }
 }
 
-@datatype class operator_interface_thread_impl_Initialization_Api (
+@datatype class operator_interface_thread_impl_operator_interface_oip_oit_Initialization_Api (
   val id: Art.BridgeId,
   val regulator_status_Id : Art.PortId,
   val monitor_status_Id : Art.PortId,
@@ -55,9 +55,9 @@ import isolette._
   val lower_desired_tempWstatus_Id : Art.PortId,
   val upper_desired_tempWstatus_Id : Art.PortId,
   val lower_alarm_tempWstatus_Id : Art.PortId,
-  val upper_alarm_tempWstatus_Id : Art.PortId) extends operator_interface_thread_impl_Api
+  val upper_alarm_tempWstatus_Id : Art.PortId) extends operator_interface_thread_impl_operator_interface_oip_oit_Api
 
-@datatype class operator_interface_thread_impl_Operational_Api (
+@datatype class operator_interface_thread_impl_operator_interface_oip_oit_Operational_Api (
   val id: Art.BridgeId,
   val regulator_status_Id : Art.PortId,
   val monitor_status_Id : Art.PortId,
@@ -66,7 +66,7 @@ import isolette._
   val lower_desired_tempWstatus_Id : Art.PortId,
   val upper_desired_tempWstatus_Id : Art.PortId,
   val lower_alarm_tempWstatus_Id : Art.PortId,
-  val upper_alarm_tempWstatus_Id : Art.PortId) extends operator_interface_thread_impl_Api {
+  val upper_alarm_tempWstatus_Id : Art.PortId) extends operator_interface_thread_impl_operator_interface_oip_oit_Api {
 
   def get_regulator_status() : Option[Isolette_Data_Model.Status.Type] = {
     val value : Option[Isolette_Data_Model.Status.Type] = Art.getValue(regulator_status_Id) match {

@@ -6,7 +6,7 @@ import org.sireum._
 import art._
 import isolette._
 
-@sig trait Manage_Alarm_impl_Api {
+@sig trait Manage_Alarm_impl_thermostat_monitor_temperature_manage_alarm_Api {
   def id: Art.BridgeId
   def current_tempWstatus_Id : Art.PortId
   def lower_alarm_temp_Id : Art.PortId
@@ -31,21 +31,21 @@ import isolette._
   }
 }
 
-@datatype class Manage_Alarm_impl_Initialization_Api (
+@datatype class Manage_Alarm_impl_thermostat_monitor_temperature_manage_alarm_Initialization_Api (
   val id: Art.BridgeId,
   val current_tempWstatus_Id : Art.PortId,
   val lower_alarm_temp_Id : Art.PortId,
   val upper_alarm_temp_Id : Art.PortId,
   val monitor_mode_Id : Art.PortId,
-  val alarm_control_Id : Art.PortId) extends Manage_Alarm_impl_Api
+  val alarm_control_Id : Art.PortId) extends Manage_Alarm_impl_thermostat_monitor_temperature_manage_alarm_Api
 
-@datatype class Manage_Alarm_impl_Operational_Api (
+@datatype class Manage_Alarm_impl_thermostat_monitor_temperature_manage_alarm_Operational_Api (
   val id: Art.BridgeId,
   val current_tempWstatus_Id : Art.PortId,
   val lower_alarm_temp_Id : Art.PortId,
   val upper_alarm_temp_Id : Art.PortId,
   val monitor_mode_Id : Art.PortId,
-  val alarm_control_Id : Art.PortId) extends Manage_Alarm_impl_Api {
+  val alarm_control_Id : Art.PortId) extends Manage_Alarm_impl_thermostat_monitor_temperature_manage_alarm_Api {
 
   def get_current_tempWstatus() : Option[Isolette_Data_Model.TempWstatus_impl] = {
     val value : Option[Isolette_Data_Model.TempWstatus_impl] = Art.getValue(current_tempWstatus_Id) match {

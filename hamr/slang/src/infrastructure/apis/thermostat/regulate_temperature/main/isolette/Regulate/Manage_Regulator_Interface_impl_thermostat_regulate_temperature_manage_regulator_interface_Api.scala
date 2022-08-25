@@ -6,7 +6,7 @@ import org.sireum._
 import art._
 import isolette._
 
-@sig trait Manage_Regulator_Interface_impl_Api {
+@sig trait Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_regulator_interface_Api {
   def id: Art.BridgeId
   def upper_desired_tempWstatus_Id : Art.PortId
   def lower_desired_tempWstatus_Id : Art.PortId
@@ -51,7 +51,7 @@ import isolette._
   }
 }
 
-@datatype class Manage_Regulator_Interface_impl_Initialization_Api (
+@datatype class Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_regulator_interface_Initialization_Api (
   val id: Art.BridgeId,
   val upper_desired_tempWstatus_Id : Art.PortId,
   val lower_desired_tempWstatus_Id : Art.PortId,
@@ -61,9 +61,9 @@ import isolette._
   val lower_desired_temp_Id : Art.PortId,
   val displayed_temp_Id : Art.PortId,
   val regulator_status_Id : Art.PortId,
-  val interface_failure_Id : Art.PortId) extends Manage_Regulator_Interface_impl_Api
+  val interface_failure_Id : Art.PortId) extends Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_regulator_interface_Api
 
-@datatype class Manage_Regulator_Interface_impl_Operational_Api (
+@datatype class Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_regulator_interface_Operational_Api (
   val id: Art.BridgeId,
   val upper_desired_tempWstatus_Id : Art.PortId,
   val lower_desired_tempWstatus_Id : Art.PortId,
@@ -73,7 +73,7 @@ import isolette._
   val lower_desired_temp_Id : Art.PortId,
   val displayed_temp_Id : Art.PortId,
   val regulator_status_Id : Art.PortId,
-  val interface_failure_Id : Art.PortId) extends Manage_Regulator_Interface_impl_Api {
+  val interface_failure_Id : Art.PortId) extends Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_regulator_interface_Api {
 
   def get_upper_desired_tempWstatus() : Option[Isolette_Data_Model.TempWstatus_impl] = {
     val value : Option[Isolette_Data_Model.TempWstatus_impl] = Art.getValue(upper_desired_tempWstatus_Id) match {

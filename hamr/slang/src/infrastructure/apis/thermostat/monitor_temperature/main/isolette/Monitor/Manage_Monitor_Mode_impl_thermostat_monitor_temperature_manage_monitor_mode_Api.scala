@@ -1,20 +1,20 @@
 // #Sireum
 
-package isolette.Regulate
+package isolette.Monitor
 
 import org.sireum._
 import art._
 import isolette._
 
-@sig trait Manage_Regulator_Mode_impl_Api {
+@sig trait Manage_Monitor_Mode_impl_thermostat_monitor_temperature_manage_monitor_mode_Api {
   def id: Art.BridgeId
   def current_tempWstatus_Id : Art.PortId
   def interface_failure_Id : Art.PortId
   def internal_failure_Id : Art.PortId
-  def regulator_mode_Id : Art.PortId
+  def monitor_mode_Id : Art.PortId
 
-  def put_regulator_mode(value : Isolette_Data_Model.Regulator_Mode.Type) : Unit = {
-    Art.putValue(regulator_mode_Id, Isolette_Data_Model.Regulator_Mode_Payload(value))
+  def put_monitor_mode(value : Isolette_Data_Model.Monitor_Mode.Type) : Unit = {
+    Art.putValue(monitor_mode_Id, Isolette_Data_Model.Monitor_Mode_Payload(value))
   }
 
   def logInfo(msg: String): Unit = {
@@ -30,19 +30,19 @@ import isolette._
   }
 }
 
-@datatype class Manage_Regulator_Mode_impl_Initialization_Api (
+@datatype class Manage_Monitor_Mode_impl_thermostat_monitor_temperature_manage_monitor_mode_Initialization_Api (
   val id: Art.BridgeId,
   val current_tempWstatus_Id : Art.PortId,
   val interface_failure_Id : Art.PortId,
   val internal_failure_Id : Art.PortId,
-  val regulator_mode_Id : Art.PortId) extends Manage_Regulator_Mode_impl_Api
+  val monitor_mode_Id : Art.PortId) extends Manage_Monitor_Mode_impl_thermostat_monitor_temperature_manage_monitor_mode_Api
 
-@datatype class Manage_Regulator_Mode_impl_Operational_Api (
+@datatype class Manage_Monitor_Mode_impl_thermostat_monitor_temperature_manage_monitor_mode_Operational_Api (
   val id: Art.BridgeId,
   val current_tempWstatus_Id : Art.PortId,
   val interface_failure_Id : Art.PortId,
   val internal_failure_Id : Art.PortId,
-  val regulator_mode_Id : Art.PortId) extends Manage_Regulator_Mode_impl_Api {
+  val monitor_mode_Id : Art.PortId) extends Manage_Monitor_Mode_impl_thermostat_monitor_temperature_manage_monitor_mode_Api {
 
   def get_current_tempWstatus() : Option[Isolette_Data_Model.TempWstatus_impl] = {
     val value : Option[Isolette_Data_Model.TempWstatus_impl] = Art.getValue(current_tempWstatus_Id) match {

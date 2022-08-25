@@ -32,8 +32,8 @@ import isolette.Devices.{Temperature_Sensor_impl_temperature_sensor_cpi_thermost
     eventOuts = ISZ()
   )
 
-  val initialization_api : Temperature_Sensor_impl_Initialization_Api = {
-    val api = Temperature_Sensor_impl_Initialization_Api(
+  val initialization_api : Temperature_Sensor_impl_temperature_sensor_cpi_thermostat_Initialization_Api = {
+    val api = Temperature_Sensor_impl_temperature_sensor_cpi_thermostat_Initialization_Api(
       id,
       air.id,
       current_tempWstatus.id
@@ -42,8 +42,8 @@ import isolette.Devices.{Temperature_Sensor_impl_temperature_sensor_cpi_thermost
     api
   }
 
-  val operational_api : Temperature_Sensor_impl_Operational_Api = {
-    val api = Temperature_Sensor_impl_Operational_Api(
+  val operational_api : Temperature_Sensor_impl_temperature_sensor_cpi_thermostat_Operational_Api = {
+    val api = Temperature_Sensor_impl_temperature_sensor_cpi_thermostat_Operational_Api(
       id,
       air.id,
       current_tempWstatus.id
@@ -67,8 +67,8 @@ import isolette.Devices.{Temperature_Sensor_impl_temperature_sensor_cpi_thermost
 
 object Temperature_Sensor_impl_temperature_sensor_cpi_thermostat_Bridge {
 
-  var c_initialization_api: Option[Temperature_Sensor_impl_Initialization_Api] = None()
-  var c_operational_api: Option[Temperature_Sensor_impl_Operational_Api] = None()
+  var c_initialization_api: Option[Temperature_Sensor_impl_temperature_sensor_cpi_thermostat_Initialization_Api] = None()
+  var c_operational_api: Option[Temperature_Sensor_impl_temperature_sensor_cpi_thermostat_Operational_Api] = None()
 
   @datatype class EntryPoints(
     Temperature_Sensor_impl_temperature_sensor_cpi_thermostat_BridgeId : Art.BridgeId,
@@ -78,8 +78,8 @@ object Temperature_Sensor_impl_temperature_sensor_cpi_thermostat_Bridge {
 
     dispatchTriggers : Option[ISZ[Art.PortId]],
 
-    initialization_api: Temperature_Sensor_impl_Initialization_Api,
-    operational_api: Temperature_Sensor_impl_Operational_Api) extends Bridge.EntryPoints {
+    initialization_api: Temperature_Sensor_impl_temperature_sensor_cpi_thermostat_Initialization_Api,
+    operational_api: Temperature_Sensor_impl_temperature_sensor_cpi_thermostat_Operational_Api) extends Bridge.EntryPoints {
 
     val dataInPortIds: ISZ[Art.PortId] = ISZ(air_Id)
 
@@ -92,7 +92,7 @@ object Temperature_Sensor_impl_temperature_sensor_cpi_thermostat_Bridge {
     def compute(): Unit = {
       Art.receiveInput(eventInPortIds, dataInPortIds)
 
-      // implement the following in 'component':  def timeTriggered(api: Temperature_Sensor_impl_Operational_Api): Unit = {}
+      // implement the following in 'component':  def timeTriggered(api: Temperature_Sensor_impl_temperature_sensor_cpi_thermostat_Operational_Api): Unit = {}
       component.timeTriggered(operational_api)
 
       Art.sendOutput(eventOutPortIds, dataOutPortIds)
@@ -102,35 +102,35 @@ object Temperature_Sensor_impl_temperature_sensor_cpi_thermostat_Bridge {
     def testCompute(): Unit = {
       Art.receiveInput(eventInPortIds, dataInPortIds)
 
-      // implement the following in 'component':  def timeTriggered(api: Temperature_Sensor_impl_Operational_Api): Unit = {}
+      // implement the following in 'component':  def timeTriggered(api: Temperature_Sensor_impl_temperature_sensor_cpi_thermostat_Operational_Api): Unit = {}
       component.timeTriggered(operational_api)
 
       Art.releaseOutput(eventOutPortIds, dataOutPortIds)
     }
 
     def activate(): Unit = {
-      // implement the following method in 'component':  def activate(api: Temperature_Sensor_impl_Operational_Api): Unit = {}
+      // implement the following method in 'component':  def activate(api: Temperature_Sensor_impl_temperature_sensor_cpi_thermostat_Operational_Api): Unit = {}
       component.activate(operational_api)
     }
 
     def deactivate(): Unit = {
-      // implement the following method in 'component':  def deactivate(api: Temperature_Sensor_impl_Operational_Api): Unit = {}
+      // implement the following method in 'component':  def deactivate(api: Temperature_Sensor_impl_temperature_sensor_cpi_thermostat_Operational_Api): Unit = {}
       component.deactivate(operational_api)
     }
 
     def finalise(): Unit = {
-      // implement the following method in 'component':  def finalise(api: Temperature_Sensor_impl_Operational_Api): Unit = {}
+      // implement the following method in 'component':  def finalise(api: Temperature_Sensor_impl_temperature_sensor_cpi_thermostat_Operational_Api): Unit = {}
       component.finalise(operational_api)
     }
 
     def initialise(): Unit = {
-      // implement the following method in 'component':  def initialise(api: Temperature_Sensor_impl_Initialization_Api): Unit = {}
+      // implement the following method in 'component':  def initialise(api: Temperature_Sensor_impl_temperature_sensor_cpi_thermostat_Initialization_Api): Unit = {}
       component.initialise(initialization_api)
       Art.sendOutput(eventOutPortIds, dataOutPortIds)
     }
 
     def recover(): Unit = {
-      // implement the following method in 'component':  def recover(api: Temperature_Sensor_impl_Operational_Api): Unit = {}
+      // implement the following method in 'component':  def recover(api: Temperature_Sensor_impl_temperature_sensor_cpi_thermostat_Operational_Api): Unit = {}
       component.recover(operational_api)
     }
   }

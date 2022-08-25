@@ -50,8 +50,8 @@ import isolette.Isolette.{operator_interface_thread_impl_operator_interface_oip_
     eventOuts = ISZ()
   )
 
-  val initialization_api : operator_interface_thread_impl_Initialization_Api = {
-    val api = operator_interface_thread_impl_Initialization_Api(
+  val initialization_api : operator_interface_thread_impl_operator_interface_oip_oit_Initialization_Api = {
+    val api = operator_interface_thread_impl_operator_interface_oip_oit_Initialization_Api(
       id,
       regulator_status.id,
       monitor_status.id,
@@ -66,8 +66,8 @@ import isolette.Isolette.{operator_interface_thread_impl_operator_interface_oip_
     api
   }
 
-  val operational_api : operator_interface_thread_impl_Operational_Api = {
-    val api = operator_interface_thread_impl_Operational_Api(
+  val operational_api : operator_interface_thread_impl_operator_interface_oip_oit_Operational_Api = {
+    val api = operator_interface_thread_impl_operator_interface_oip_oit_Operational_Api(
       id,
       regulator_status.id,
       monitor_status.id,
@@ -103,8 +103,8 @@ import isolette.Isolette.{operator_interface_thread_impl_operator_interface_oip_
 
 object operator_interface_thread_impl_operator_interface_oip_oit_Bridge {
 
-  var c_initialization_api: Option[operator_interface_thread_impl_Initialization_Api] = None()
-  var c_operational_api: Option[operator_interface_thread_impl_Operational_Api] = None()
+  var c_initialization_api: Option[operator_interface_thread_impl_operator_interface_oip_oit_Initialization_Api] = None()
+  var c_operational_api: Option[operator_interface_thread_impl_operator_interface_oip_oit_Operational_Api] = None()
 
   @datatype class EntryPoints(
     operator_interface_thread_impl_operator_interface_oip_oit_BridgeId : Art.BridgeId,
@@ -120,8 +120,8 @@ object operator_interface_thread_impl_operator_interface_oip_oit_Bridge {
 
     dispatchTriggers : Option[ISZ[Art.PortId]],
 
-    initialization_api: operator_interface_thread_impl_Initialization_Api,
-    operational_api: operator_interface_thread_impl_Operational_Api) extends Bridge.EntryPoints {
+    initialization_api: operator_interface_thread_impl_operator_interface_oip_oit_Initialization_Api,
+    operational_api: operator_interface_thread_impl_operator_interface_oip_oit_Operational_Api) extends Bridge.EntryPoints {
 
     val dataInPortIds: ISZ[Art.PortId] = ISZ(regulator_status_Id,
                                              monitor_status_Id,
@@ -140,7 +140,7 @@ object operator_interface_thread_impl_operator_interface_oip_oit_Bridge {
     def compute(): Unit = {
       Art.receiveInput(eventInPortIds, dataInPortIds)
 
-      // implement the following in 'component':  def timeTriggered(api: operator_interface_thread_impl_Operational_Api): Unit = {}
+      // implement the following in 'component':  def timeTriggered(api: operator_interface_thread_impl_operator_interface_oip_oit_Operational_Api): Unit = {}
       component.timeTriggered(operational_api)
 
       Art.sendOutput(eventOutPortIds, dataOutPortIds)
@@ -150,35 +150,35 @@ object operator_interface_thread_impl_operator_interface_oip_oit_Bridge {
     def testCompute(): Unit = {
       Art.receiveInput(eventInPortIds, dataInPortIds)
 
-      // implement the following in 'component':  def timeTriggered(api: operator_interface_thread_impl_Operational_Api): Unit = {}
+      // implement the following in 'component':  def timeTriggered(api: operator_interface_thread_impl_operator_interface_oip_oit_Operational_Api): Unit = {}
       component.timeTriggered(operational_api)
 
       Art.releaseOutput(eventOutPortIds, dataOutPortIds)
     }
 
     def activate(): Unit = {
-      // implement the following method in 'component':  def activate(api: operator_interface_thread_impl_Operational_Api): Unit = {}
+      // implement the following method in 'component':  def activate(api: operator_interface_thread_impl_operator_interface_oip_oit_Operational_Api): Unit = {}
       component.activate(operational_api)
     }
 
     def deactivate(): Unit = {
-      // implement the following method in 'component':  def deactivate(api: operator_interface_thread_impl_Operational_Api): Unit = {}
+      // implement the following method in 'component':  def deactivate(api: operator_interface_thread_impl_operator_interface_oip_oit_Operational_Api): Unit = {}
       component.deactivate(operational_api)
     }
 
     def finalise(): Unit = {
-      // implement the following method in 'component':  def finalise(api: operator_interface_thread_impl_Operational_Api): Unit = {}
+      // implement the following method in 'component':  def finalise(api: operator_interface_thread_impl_operator_interface_oip_oit_Operational_Api): Unit = {}
       component.finalise(operational_api)
     }
 
     def initialise(): Unit = {
-      // implement the following method in 'component':  def initialise(api: operator_interface_thread_impl_Initialization_Api): Unit = {}
+      // implement the following method in 'component':  def initialise(api: operator_interface_thread_impl_operator_interface_oip_oit_Initialization_Api): Unit = {}
       component.initialise(initialization_api)
       Art.sendOutput(eventOutPortIds, dataOutPortIds)
     }
 
     def recover(): Unit = {
-      // implement the following method in 'component':  def recover(api: operator_interface_thread_impl_Operational_Api): Unit = {}
+      // implement the following method in 'component':  def recover(api: operator_interface_thread_impl_operator_interface_oip_oit_Operational_Api): Unit = {}
       component.recover(operational_api)
     }
   }

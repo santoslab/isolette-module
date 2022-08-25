@@ -41,8 +41,8 @@ import isolette.Regulate.{Manage_Heat_Source_impl_thermostat_regulate_temperatur
     eventOuts = ISZ()
   )
 
-  val initialization_api : Manage_Heat_Source_impl_Initialization_Api = {
-    val api = Manage_Heat_Source_impl_Initialization_Api(
+  val initialization_api : Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source_Initialization_Api = {
+    val api = Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source_Initialization_Api(
       id,
       current_tempWstatus.id,
       lower_desired_temp.id,
@@ -54,8 +54,8 @@ import isolette.Regulate.{Manage_Heat_Source_impl_thermostat_regulate_temperatur
     api
   }
 
-  val operational_api : Manage_Heat_Source_impl_Operational_Api = {
-    val api = Manage_Heat_Source_impl_Operational_Api(
+  val operational_api : Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source_Operational_Api = {
+    val api = Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source_Operational_Api(
       id,
       current_tempWstatus.id,
       lower_desired_temp.id,
@@ -85,8 +85,8 @@ import isolette.Regulate.{Manage_Heat_Source_impl_thermostat_regulate_temperatur
 
 object Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source_Bridge {
 
-  var c_initialization_api: Option[Manage_Heat_Source_impl_Initialization_Api] = None()
-  var c_operational_api: Option[Manage_Heat_Source_impl_Operational_Api] = None()
+  var c_initialization_api: Option[Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source_Initialization_Api] = None()
+  var c_operational_api: Option[Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source_Operational_Api] = None()
 
   @datatype class EntryPoints(
     Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source_BridgeId : Art.BridgeId,
@@ -99,8 +99,8 @@ object Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_sourc
 
     dispatchTriggers : Option[ISZ[Art.PortId]],
 
-    initialization_api: Manage_Heat_Source_impl_Initialization_Api,
-    operational_api: Manage_Heat_Source_impl_Operational_Api) extends Bridge.EntryPoints {
+    initialization_api: Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source_Initialization_Api,
+    operational_api: Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source_Operational_Api) extends Bridge.EntryPoints {
 
     val dataInPortIds: ISZ[Art.PortId] = ISZ(current_tempWstatus_Id,
                                              lower_desired_temp_Id,
@@ -116,7 +116,7 @@ object Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_sourc
     def compute(): Unit = {
       Art.receiveInput(eventInPortIds, dataInPortIds)
 
-      // implement the following in 'component':  def timeTriggered(api: Manage_Heat_Source_impl_Operational_Api): Unit = {}
+      // implement the following in 'component':  def timeTriggered(api: Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source_Operational_Api): Unit = {}
       component.timeTriggered(operational_api)
 
       Art.sendOutput(eventOutPortIds, dataOutPortIds)
@@ -126,35 +126,35 @@ object Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_sourc
     def testCompute(): Unit = {
       Art.receiveInput(eventInPortIds, dataInPortIds)
 
-      // implement the following in 'component':  def timeTriggered(api: Manage_Heat_Source_impl_Operational_Api): Unit = {}
+      // implement the following in 'component':  def timeTriggered(api: Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source_Operational_Api): Unit = {}
       component.timeTriggered(operational_api)
 
       Art.releaseOutput(eventOutPortIds, dataOutPortIds)
     }
 
     def activate(): Unit = {
-      // implement the following method in 'component':  def activate(api: Manage_Heat_Source_impl_Operational_Api): Unit = {}
+      // implement the following method in 'component':  def activate(api: Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source_Operational_Api): Unit = {}
       component.activate(operational_api)
     }
 
     def deactivate(): Unit = {
-      // implement the following method in 'component':  def deactivate(api: Manage_Heat_Source_impl_Operational_Api): Unit = {}
+      // implement the following method in 'component':  def deactivate(api: Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source_Operational_Api): Unit = {}
       component.deactivate(operational_api)
     }
 
     def finalise(): Unit = {
-      // implement the following method in 'component':  def finalise(api: Manage_Heat_Source_impl_Operational_Api): Unit = {}
+      // implement the following method in 'component':  def finalise(api: Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source_Operational_Api): Unit = {}
       component.finalise(operational_api)
     }
 
     def initialise(): Unit = {
-      // implement the following method in 'component':  def initialise(api: Manage_Heat_Source_impl_Initialization_Api): Unit = {}
+      // implement the following method in 'component':  def initialise(api: Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source_Initialization_Api): Unit = {}
       component.initialise(initialization_api)
       Art.sendOutput(eventOutPortIds, dataOutPortIds)
     }
 
     def recover(): Unit = {
-      // implement the following method in 'component':  def recover(api: Manage_Heat_Source_impl_Operational_Api): Unit = {}
+      // implement the following method in 'component':  def recover(api: Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source_Operational_Api): Unit = {}
       component.recover(operational_api)
     }
   }

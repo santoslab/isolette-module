@@ -28,7 +28,7 @@ var project: ISZ[String] = Cli(Os.pathSepChar).parseTranspile(Os.cliArgs, 0) mat
     if(o.legacy) {
       println("Using Legacy Scheduler")
 
-      val sourcePaths: ISZ[String] = ISZ(
+      val main_sourcePaths: ISZ[String] = ISZ(
         s"${SCRIPT_HOME}/../src/app/jvm/src/main/scala",
         s"${SCRIPT_HOME}/../src/app/shared/src/main/scala",
         s"${SCRIPT_HOME}/../src/common/data/main",
@@ -54,7 +54,7 @@ var project: ISZ[String] = Cli(Os.pathSepChar).parseTranspile(Os.cliArgs, 0) mat
         s"${SCRIPT_HOME}/../src/infrastructure/schedulers/main")
 
       val main: ISZ[String] = ISZ(
-        "--sourcepath", st"${(sourcePaths, PATH_SEP)}".render,
+        "--sourcepath", st"${(main_sourcePaths, PATH_SEP)}".render,
         "--output-dir", s"${SCRIPT_HOME}/../../c/nix",
         "--name", "main",
         "--apps", "isolette.Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_regulator_interface_App,isolette.Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source_App,isolette.Manage_Regulator_Mode_impl_thermostat_regulate_temperature_manage_regulator_mode_App,isolette.Manage_Alarm_impl_thermostat_monitor_temperature_manage_alarm_App,isolette.Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monitor_interface_App,isolette.Manage_Monitor_Mode_impl_thermostat_monitor_temperature_manage_monitor_mode_App,isolette.operator_interface_thread_impl_operator_interface_oip_oit_App,isolette.Temperature_Sensor_impl_temperature_sensor_cpi_thermostat_App,isolette.Heat_Source_impl_heat_source_cpi_heat_controller_App,isolette.LegacyDemo",
@@ -71,7 +71,7 @@ var project: ISZ[String] = Cli(Os.pathSepChar).parseTranspile(Os.cliArgs, 0) mat
         "--verbose")
       main
     } else {
-      val sourcePaths: ISZ[String] = ISZ(
+      val main_sourcePaths: ISZ[String] = ISZ(
         s"${SCRIPT_HOME}/../src/app/jvm/src/main/scala",
         s"${SCRIPT_HOME}/../src/app/shared/src/main/scala",
         s"${SCRIPT_HOME}/../src/common/data/main",
@@ -97,7 +97,7 @@ var project: ISZ[String] = Cli(Os.pathSepChar).parseTranspile(Os.cliArgs, 0) mat
         s"${SCRIPT_HOME}/../src/infrastructure/schedulers/main")
 
       val main: ISZ[String] = ISZ(
-        "--sourcepath", st"${(sourcePaths, PATH_SEP)}".render,
+        "--sourcepath", st"${(main_sourcePaths, PATH_SEP)}".render,
         "--output-dir", s"${SCRIPT_HOME}/../../c/nix",
         "--name", "main",
         "--apps", "isolette.Demo",

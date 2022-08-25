@@ -38,7 +38,7 @@ object Manage_Monitor_Mode_impl_thermostat_monitor_temperature_manage_monitor_mo
   // Initialize Entry Point
   //======================================
 
-  def initialise(api: Manage_Monitor_Mode_impl_Initialization_Api): Unit = {
+  def initialise(api: Manage_Monitor_Mode_impl_thermostat_monitor_temperature_manage_monitor_mode_Initialization_Api): Unit = {
     // TODO: There is a bit of a conceptual glitch here since following the
     //   AADL model of computation we should initialize all values here --
     //   There should be no notion of initializing execution outside of the
@@ -62,7 +62,7 @@ object Manage_Monitor_Mode_impl_thermostat_monitor_temperature_manage_monitor_mo
     firstInvocationFlag = true
   }
 
-  def timeTriggered(api: Manage_Monitor_Mode_impl_Operational_Api): Unit = {
+  def timeTriggered(api: Manage_Monitor_Mode_impl_thermostat_monitor_temperature_manage_monitor_mode_Operational_Api): Unit = {
 
     // Requirements for Manage @strictpure def Mode (MMM)
     /*
@@ -206,11 +206,11 @@ object Manage_Monitor_Mode_impl_thermostat_monitor_temperature_manage_monitor_mo
     firstInvocationFlag = false
   }
 
-  def activate(api: Manage_Monitor_Mode_impl_Operational_Api): Unit = { }
+  def activate(api: Manage_Monitor_Mode_impl_thermostat_monitor_temperature_manage_monitor_mode_Operational_Api): Unit = { }
 
-  def deactivate(api: Manage_Monitor_Mode_impl_Operational_Api): Unit = { }
+  def deactivate(api: Manage_Monitor_Mode_impl_thermostat_monitor_temperature_manage_monitor_mode_Operational_Api): Unit = { }
 
-  def finalise(api: Manage_Monitor_Mode_impl_Operational_Api): Unit = { }
+  def finalise(api: Manage_Monitor_Mode_impl_thermostat_monitor_temperature_manage_monitor_mode_Operational_Api): Unit = { }
 
-  def recover(api: Manage_Monitor_Mode_impl_Operational_Api): Unit = { }
+  def recover(api: Manage_Monitor_Mode_impl_thermostat_monitor_temperature_manage_monitor_mode_Operational_Api): Unit = { }
 }

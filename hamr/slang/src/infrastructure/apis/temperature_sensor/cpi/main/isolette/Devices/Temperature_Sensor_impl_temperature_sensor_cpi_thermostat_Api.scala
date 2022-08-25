@@ -6,7 +6,7 @@ import org.sireum._
 import art._
 import isolette._
 
-@sig trait Temperature_Sensor_impl_Api {
+@sig trait Temperature_Sensor_impl_temperature_sensor_cpi_thermostat_Api {
   def id: Art.BridgeId
   def air_Id : Art.PortId
   def current_tempWstatus_Id : Art.PortId
@@ -28,15 +28,15 @@ import isolette._
   }
 }
 
-@datatype class Temperature_Sensor_impl_Initialization_Api (
+@datatype class Temperature_Sensor_impl_temperature_sensor_cpi_thermostat_Initialization_Api (
   val id: Art.BridgeId,
   val air_Id : Art.PortId,
-  val current_tempWstatus_Id : Art.PortId) extends Temperature_Sensor_impl_Api
+  val current_tempWstatus_Id : Art.PortId) extends Temperature_Sensor_impl_temperature_sensor_cpi_thermostat_Api
 
-@datatype class Temperature_Sensor_impl_Operational_Api (
+@datatype class Temperature_Sensor_impl_temperature_sensor_cpi_thermostat_Operational_Api (
   val id: Art.BridgeId,
   val air_Id : Art.PortId,
-  val current_tempWstatus_Id : Art.PortId) extends Temperature_Sensor_impl_Api {
+  val current_tempWstatus_Id : Art.PortId) extends Temperature_Sensor_impl_temperature_sensor_cpi_thermostat_Api {
 
   def get_air() : Option[Isolette_Data_Model.PhysicalTemp_impl] = {
     val value : Option[Isolette_Data_Model.PhysicalTemp_impl] = Art.getValue(air_Id) match {

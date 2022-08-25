@@ -26,7 +26,7 @@ object Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monit
   // Initialize Entry Point
   //======================================
 
-  def initialise(api: Manage_Monitor_Interface_impl_Initialization_Api): Unit = {
+  def initialise(api: Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monitor_interface_Initialization_Api): Unit = {
     /*
     Contract(
       Modifies(api),
@@ -64,7 +64,7 @@ object Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monit
   // Compute Entry Point
   //======================================
 
-  def timeTriggered(api: Manage_Monitor_Interface_impl_Operational_Api): Unit = {
+  def timeTriggered(api: Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monitor_interface_Operational_Api): Unit = {
     /*
     Contract(
       Modifies(api),
@@ -242,11 +242,11 @@ object Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monit
     }
   }
 
-  def activate(api: Manage_Monitor_Interface_impl_Operational_Api): Unit = { }
+  def activate(api: Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monitor_interface_Operational_Api): Unit = { }
 
-  def deactivate(api: Manage_Monitor_Interface_impl_Operational_Api): Unit = { }
+  def deactivate(api: Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monitor_interface_Operational_Api): Unit = { }
 
-  def finalise(api: Manage_Monitor_Interface_impl_Operational_Api): Unit = { }
+  def finalise(api: Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monitor_interface_Operational_Api): Unit = { }
 
-  def recover(api: Manage_Monitor_Interface_impl_Operational_Api): Unit = { }
+  def recover(api: Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monitor_interface_Operational_Api): Unit = { }
 }

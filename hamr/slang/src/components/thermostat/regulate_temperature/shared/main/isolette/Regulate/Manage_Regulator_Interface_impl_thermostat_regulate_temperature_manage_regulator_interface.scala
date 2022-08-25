@@ -43,7 +43,7 @@ object Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_re
   // Initialize Entry Point
   //======================================
 
-  def initialise(api: Manage_Regulator_Interface_impl_Initialization_Api): Unit = {
+  def initialise(api: Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_regulator_interface_Initialization_Api): Unit = {
     /*
     Contract(
       Modifies(api),
@@ -80,7 +80,7 @@ object Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_re
   // Compute Entry Point
   //======================================
 
-  def timeTriggered(api: Manage_Regulator_Interface_impl_Operational_Api): Unit = {
+  def timeTriggered(api: Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_regulator_interface_Operational_Api): Unit = {
 
     // place holder for global/component in/out declarations,
     // which should reference port variables defined in bridge and any user declared component persistent state
@@ -399,11 +399,11 @@ object Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_re
     }
   }
 
-  def activate(api: Manage_Regulator_Interface_impl_Operational_Api): Unit = { }
+  def activate(api: Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_regulator_interface_Operational_Api): Unit = { }
 
-  def deactivate(api: Manage_Regulator_Interface_impl_Operational_Api): Unit = { }
+  def deactivate(api: Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_regulator_interface_Operational_Api): Unit = { }
 
-  def finalise(api: Manage_Regulator_Interface_impl_Operational_Api): Unit = { }
+  def finalise(api: Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_regulator_interface_Operational_Api): Unit = { }
 
-  def recover(api: Manage_Regulator_Interface_impl_Operational_Api): Unit = { }
+  def recover(api: Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_regulator_interface_Operational_Api): Unit = { }
 }
