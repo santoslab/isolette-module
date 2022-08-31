@@ -39,7 +39,7 @@ jobs:
           
           export PATH=$SIREUM_HOME/bin:$PATH
 
-          $SIREUM_HOME/bin/install/fmide.cmd
+          $SIREUM_HOME/bin/install/fmide.cmd fixed
 
           $GITHUB_WORKSPACE/isolette-module/aadl/bin/clean.cmd
           

@@ -68,7 +68,7 @@ jobs:
           
           set PATH=%SIREUM_HOME%\bin;%PATH%
 
-          call %SIREUM_HOME%\bin\install\fmide.cmd
+          call %SIREUM_HOME%\bin\install\fmide.cmd fixed
           
           call %GITHUB_WORKSPACE%\isolette-module\aadl\bin\clean.cmd
           

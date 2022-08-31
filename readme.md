@@ -42,7 +42,7 @@ export PATH=$SIREUM_HOME/bin:$PATH
 This version of FMIDE will use the ``sireum.jar`` built above
 
 ```bash
-$SIREUM_HOME/bin/install/fmide.cmd
+$SIREUM_HOME/bin/install/fmide.cmd fixed
 ```
 
 ##  Clone This Repository
