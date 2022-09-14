@@ -32,7 +32,7 @@ val fmide : Os.Path =
 
 if(!fmide.exists) {
   println(s"Please install FMIDE by running ${ (sireumBin / "install" / "fmide.cmd").canon.string }");
-  Os.exit(-1);
+  Os.exit(1);
 }
   
 val osireum = ISZ(fmide.string, "-nosplash", "-console", "-consoleLog", "-data", "@user.home/.sireum", "-application", "org.sireum.aadl.osate.cli")
@@ -51,5 +51,15 @@ val codegenArgs = ISZ("hamr", "codegen",
   "--aadl-root-dir", aadlDir.string,
   (aadlDir / ".system").string)
 
-Os.proc(osireum ++ codegenArgs).console.runCheck()
+val results = Os.proc(osireum ++ codegenArgs).console.run()
 
+// Running under windows results in 23 which is an indication 
+// a platform restart was requested. Codegen completes 
+// successfully and the cli app returns 0 so 
+// not sure why this is being issued.
+if(results.exitCode == 0 || results.exitCode == 23) {
+  Os.exitCode(0)
+} else {
+  println(results.err)
+  Os.exitCode(results.exitCode)
+}
