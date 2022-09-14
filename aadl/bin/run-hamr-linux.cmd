@@ -58,8 +58,8 @@ val results = Os.proc(osireum ++ codegenArgs).console.run()
 // successfully and the cli app returns 0 so 
 // not sure why this is being issued.
 if(results.exitCode == 0 || results.exitCode == 23) {
-  Os.exitCode(0)
+  Os.exit(0)
 } else {
   println(results.err)
-  Os.exitCode(results.exitCode)
+  Os.exit(results.exitCode)
 }
