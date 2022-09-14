@@ -43,7 +43,7 @@ jobs:
 
           $GITHUB_WORKSPACE/isolette-module/aadl/bin/clean.cmd
           
-          $GITHUB_WORKSPACE/isolette-module/aadl/bin/run-hamr-linux.cmd
+          $GITHUB_WORKSPACE/isolette-module/aadl/bin/run-hamr.cmd Linux
 
           $GITHUB_WORKSPACE/isolette-module/aadl/bin/stacksize-fix.cmd
           
@@ -51,7 +51,7 @@ jobs:
           
           $GITHUB_WORKSPACE/isolette-module/hamr/c/bin/compile.cmd
 
-          $GITHUB_WORKSPACE/isolette-module/aadl/bin/runCI.cmd
+          $GITHUB_WORKSPACE/isolette-module/aadl/bin/run-demo.cmd
           
       - name: 'Upload JS'
         uses: actions/upload-artifact@v3

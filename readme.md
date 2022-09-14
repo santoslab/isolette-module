@@ -61,13 +61,13 @@ Optionally remove all previously generated code that wasn't modified by the user
 ```
 
 Refer to the run script
-[run-hamr-jvm.cmd](aadl/bin/run-hamr-linux.cmd)
+[run-hamr.cmd](aadl/bin/run-hamr.cmd)
 to see what options were passed to codegen if you want to generate code from inside FMIDE.  
 
-From the command line you'd do:
+If you want to generate code for the JVM then from the command line you'd do:
 
 ```bash
-./isolette-module/aadl/bin/run-hamr-jvm.cmd
+./isolette-module/aadl/bin/run-hamr.cmd JVM
 ```
 
 ## Opening in IVE
@@ -110,7 +110,7 @@ open ./isolette-module/hamr/slang/index.html
 Run the following script that adds additional Slang code to your project along with the necessary C infrastructure code.
 
 ```bash
-./isolette-module/aadl/bin/run-hamr-linux.cmd
+./isolette-module/aadl/bin/run-hamr.cmd Linux
 ```
 
 

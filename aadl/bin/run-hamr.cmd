@@ -37,13 +37,23 @@ if(!fmide.exists) {
   
 val osireum = ISZ(fmide.string, "-nosplash", "-console", "-consoleLog", "-data", "@user.home/.sireum", "-application", "org.sireum.aadl.osate.cli")
 
+if(Os.cliArgs.size > 1) {
+  eprintln("Only expecting a single argument")
+  Os.exit(1)
+}
+
+val platform: String =
+  if(Os.cliArgs.nonEmpty) Os.cliArgs(0)
+  else "JVM"
+
 val codegenArgs = ISZ("hamr", "codegen",
   "--verbose",
-  "--platform", "seL4",
-  "--no-proyek-ive",
-  "--output-dir", (aadlDir.up / "hamr" / "slang").string,
+  "--platform", platform,
   "--package-name", "isolette",
+  "--output-dir", (aadlDir.up / "hamr" / "slang").string,
   "--output-c-dir", (aadlDir.up / "hamr" / "c").string,
+  "--camkes-output-dir", (aadlDir.up / "hamr" / "camkes").string,
+  "--no-proyek-ive",
   "--run-transpiler", 
   "--max-string-size", "500",
   "--aadl-root-dir", aadlDir.string,

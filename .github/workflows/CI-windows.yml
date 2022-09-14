@@ -80,7 +80,7 @@ jobs:
           
           call %GITHUB_WORKSPACE%\isolette-module\aadl\bin\clean.cmd
             
-          call %GITHUB_WORKSPACE%\isolette-module\aadl\bin\run-hamr-linux.cmd
+          call %GITHUB_WORKSPACE%\isolette-module\aadl\bin\run-hamr.cmd Linux
           echo Done running codegen. Errorlevel %errorlevel%
   
           if %errorlevel% neq 0 exit /b %errorlevel%
@@ -100,7 +100,7 @@ jobs:
           if %errorlevel% neq 0 exit /b %errorlevel%
 
 
-          call %GITHUB_WORKSPACE%\isolette-module\aadl\bin\runCI.cmd          
+          call %GITHUB_WORKSPACE%\isolette-module\aadl\bin\run-demo.cmd          
           echo Done running C demo. Errorlevel %errorlevel%
 
           if %errorlevel% neq 0 exit /b %errorlevel%
