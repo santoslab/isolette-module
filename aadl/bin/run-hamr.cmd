@@ -59,6 +59,8 @@ val codegenArgs = ISZ("hamr", "codegen",
   "--aadl-root-dir", aadlDir.string,
   (aadlDir / ".system").string)
 
+val results = Os.proc(osireum ++ codegenArgs).console.run()
+
 // Running under windows results in 23 which is an indication 
 // a platform restart was requested. Codegen completes 
 // successfully and the cli app returns 0 so 
