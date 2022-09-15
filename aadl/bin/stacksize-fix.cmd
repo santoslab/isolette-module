@@ -29,11 +29,10 @@ if (cmakeDir.exists) {
 
    val contents = ops.StringOps(cmakelists.read)
 
-   val stackSize: String =
-       if(Os.isMac) "1130496"
-       else if(Os.isWin) "1114688"
-       else if(Os.isLinux) "229376"
-       else "-1"
+   if(Os.isMac) "2375680"
+   else if(Os.isWin) "2334720"
+   else if(Os.isLinux) "doesn't-matter?"
+   else "-1"
 
    val newContent = contents.replaceAllLiterally("229376", stackSize)
    
