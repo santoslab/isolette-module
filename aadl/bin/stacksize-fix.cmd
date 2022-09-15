@@ -29,6 +29,7 @@ if (cmakeDir.exists) {
 
    val contents = ops.StringOps(cmakelists.read)
 
+   val stackSize: String = 
    if(Os.isMac) "2375680"
    else if(Os.isWin) "2334720"
    else if(Os.isLinux) "doesn't-matter?"
