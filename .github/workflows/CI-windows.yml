@@ -72,7 +72,7 @@ jobs:
           
           set PATH=%SIREUM_HOME%\bin;%PATH%
 
-          call %SIREUM_HOME%\bin\install\fmide.cmd fixed
+          call %SIREUM_HOME%\bin\install\fmide.cmd
           echo Done installing FMIDE. Errorlevel %errorlevel%
           
           if %errorlevel% neq 0 exit /b %errorlevel%
